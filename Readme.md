@@ -22,54 +22,54 @@ A boilerplate application for building web apps using express, mongoose and pass
  - 
 
 ```bash
-.
-??? /.data/                     # The compiled output (via Babel)
-??? /app/                   # Localization resources (i18n)
-?   ??? Http
-?   ?   ??? Controllers
-?   ?   ??? Middleware
-?   ??? Model
-??? /bootstrap/                # Database schema migrations
-?   ?   ??? boot-configuration.js
-?   ?   ??? boot-environment.js
-?   ?   ??? boot-helper-path.js
-?   ?   ??? boot-router.js
-?   ?   ??? index.js
-?   ?   ??? post-index.js
-??? /commands/                     # Scripts with reference/sample 
-?   ??? index.js
-?   ??? seed.js
-??? /database/
-?   ??? /schema/                       # Node.js application source files
-?   ?   ??? bank.js
-?   ?   ??? users.js
-?   ??? /seeds/                       # Node.js application source files
-?   ?    ??? bank.js
-?   ??? /connection.js
-?   ??? /all-seeds.js               # Flow type definitions
-??? /global/
-?   ??? constants.js
-?   ??? user-roles.js
-??? /helpers/*
-??? /resources/
-?   ??? /lang/
-?   ??? /view/
-??? /routes/
-?   ??? /api/
-?   ?   ??? index.js
-?   ?   ??? user.js
-?   ?   ??? guest.js
-?   ??? index.js
-?   ??? routes-string.js
-??? /tests/
-??? .env
-??? .env.example
-??? .gitignore
-??? app.js
-??? cmd.js
-??? package.json
-??? package-lock.json
-??? Readme.md
+
+├── /.data/                    
+├── /app/                   
+│   ├── Http
+│   │   ├── Controllers
+│   │   ├── Middleware
+│   ├── Model
+├── /bootstrap/                
+│   │   ├── boot-configuration.js
+│   │   ├── boot-environment.js
+│   │   ├── boot-helper-path.js
+│   │   ├── boot-router.js
+│   │   ├── index.js
+│   │   ├── post-index.js
+├── /commands/                      
+│   ├── index.js
+│   ├── seed.js
+├── /database/
+│   ├── /schema/                   
+│   │   ├── bank.js
+│   │   ├── users.js
+│   ├── /seeds/                    
+│   │    ├── bank.js
+│   ├── /connection.js
+│   └── /all-seeds.js              
+├── /global/
+│   ├── constants.js
+│   ├── user-roles.js
+├── /helpers/*
+├── /resources/
+│   ├── /lang/
+│   ├── /view/
+├── /routes/
+│   ├── /api/
+│   │   ├── index.js
+│   │   ├── user.js
+│   │   ├── guest.js
+│   ├── index.js
+│   ├── routes-string.js
+├── /tests/
+├── .env
+├── .env.example
+├── .gitignore
+├── app.js
+├── cmd.js
+├── package.json
+├── package-lock.json
+└── Readme.md
 
 ```
 ## Resolver
