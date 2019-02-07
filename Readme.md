@@ -1,6 +1,7 @@
+
 # Expressjs Boilerplate
 
-A boilerplate application for building web apps using express, mongoose and passport. 
+A boilerplate application for building web apps using express, and mongoose. 
 
 
 [![Express Logo](https://i.cloudup.com/zfY6lL7eFa-3000x3000.png)](http://expressjs.com/)
@@ -19,57 +20,56 @@ A boilerplate application for building web apps using express, mongoose and pass
  - Easy database seeding
  - Dynamic Routing
  - Validation
- - 
 
 ```bash
 
-├── /.data/                    
-├── /app/                   
-│   ├── Http
-│   │   ├── Controllers
-│   │   ├── Middleware
-│   ├── Model
-├── /bootstrap/                
-│   │   ├── boot-configuration.js
-│   │   ├── boot-environment.js
-│   │   ├── boot-helper-path.js
-│   │   ├── boot-router.js
-│   │   ├── index.js
-│   │   ├── post-index.js
-├── /commands/                      
-│   ├── index.js
-│   ├── seed.js
-├── /database/
-│   ├── /schema/                   
-│   │   ├── bank.js
-│   │   ├── users.js
-│   ├── /seeds/                    
-│   │    ├── bank.js
-│   ├── /connection.js
-│   └── /all-seeds.js              
-├── /global/
-│   ├── constants.js
-│   ├── user-roles.js
-├── /helpers/*
-├── /resources/
-│   ├── /lang/
-│   ├── /view/
-├── /routes/
-│   ├── /api/
-│   │   ├── index.js
-│   │   ├── user.js
-│   │   ├── guest.js
-│   ├── index.js
-│   ├── routes-string.js
-├── /tests/
-├── .env
-├── .env.example
-├── .gitignore
-├── app.js
-├── cmd.js
-├── package.json
-├── package-lock.json
-└── Readme.md
+??? /.data/                    
+??? /app/                   
+?   ??? Http
+?   ?   ??? Controllers
+?   ?   ??? Middleware
+?   ??? Model
+??? /bootstrap/                
+?   ?   ??? boot-configuration.js
+?   ?   ??? boot-environment.js
+?   ?   ??? boot-helper-path.js
+?   ?   ??? boot-router.js
+?   ?   ??? index.js
+?   ?   ??? post-index.js
+??? /commands/                      
+?   ??? index.js
+?   ??? seed.js
+??? /database/
+?   ??? /schema/                   
+?   ?   ??? bank.js
+?   ?   ??? users.js
+?   ??? /seeds/                    
+?   ?    ??? bank.js
+?   ??? /connection.js
+?   ??? /all-seeds.js              
+??? /global/
+?   ??? constants.js
+?   ??? user-roles.js
+??? /helpers/*
+??? /resources/
+?   ??? /lang/
+?   ??? /view/
+??? /routes/
+?   ??? /api/
+?   ?   ??? index.js
+?   ?   ??? user.js
+?   ?   ??? guest.js
+?   ??? index.js
+?   ??? routes-string.js
+??? /tests/
+??? .env
+??? .env.example
+??? .gitignore
+??? app.js
+??? cmd.js
+??? package.json
+??? package-lock.json
+??? Readme.md
 
 ```
 ## Resolver
@@ -267,7 +267,7 @@ To set your database details, open /.env file, and update the content as follows
   }
 ```
 ## Controllers
-To create a controller, create a new file e.g user-controller.js in /app/Http/Controllers. A typical controller looks like this;
+Instead of defining all of your request handling logic as Closures in route files, you may wish to organize this behavior using Controller object. Controllers can group related request handling logic into a single object (source: https://laravel.com/docs/5.7/controllers). To create a controller, create a new file e.g user-controller.js in /app/Http/Controllers. A typical controller looks like this;
 ```
 const resolver = require(process.env.resolver);
 const Controller = require('./controller');
@@ -293,6 +293,7 @@ router.get('/user/roles', UserController.getUserRoles);
 ```
 
 ## Middleware
+Middleware provide a convenient mechanism for filtering HTTP requests entering your application. Middlewares are stored in /app/Http/Middleware
 To create a middleware, create a new file e.g auth.js in /app/Http/Middleware. A typical middleware looks like this;
 ```
 module.exports = (req, res, next) => {
@@ -301,10 +302,8 @@ module.exports = (req, res, next) => {
     // proceed to next middleware
     next();
 }
-
-module.exports = UserController;
 ```
-To access your middleware anywhere, your can easily use **resolver.middleware('name-of-your-controller')**
+To access your middleware anywhere, your can easily use **resolver.middleware('name-of-your-middleware')**
 ```
 ...
 const resolver = require(process.env.resolver);
@@ -333,7 +332,7 @@ bankSchema.plugin(lastUpdateDate);
 module.exports = bankSchema;
 ```
 ## Seeds
-All database seeds are placed in /database/seeds directory.
+This boilerplate includes a simple method of seeding your database with test data using seed files. All database seeds are placed in /database/seeds directory.
 ```
 const pathResolver = require(process.env.resolver);
 const Bank= require(pathResolver.model('bank')).Bank;
@@ -460,7 +459,7 @@ To migrate your seeds then you use the bellow command.
 ```
 
 ## Commands
-This enable you to run certain commands in the CLI. 
+This enable you to run certain commands in the CLI (Command-Line Interface). 
 
 **To create you custom command;**
 create a file that host the logic to your command in */commands* e.g /commands/remove-users.js could contain the below snippet
