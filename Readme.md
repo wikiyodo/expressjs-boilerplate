@@ -548,6 +548,10 @@ validator(rules, (result) => {
 ## Testing
 Unit testing has not been included in this boilerplate. However, you can choose to include it  on your own.
 
+## Contributing
+
+Anyone and everyone is welcome to  contribute.
+
 ## License
 
 MIT
