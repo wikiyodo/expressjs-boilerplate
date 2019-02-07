@@ -1,0 +1,27 @@
+{
+  "name": "expressjs-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:staging": "./node_modules/.bin/nodemon app.js",
+    "start": "node app.js"
+  },
+  "author": {
+    "name": "Angel Wiki",
+    "email": "wikiyodo@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "helmet": "^3.15.0",
+    "mongodb": "^3.1.13",
+    "mongoose": "^5.4.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  },
+  "contributors": []
+
+}
