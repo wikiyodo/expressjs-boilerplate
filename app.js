@@ -24,7 +24,6 @@ const serverStart= async () => {
     const userMiddleWare = require('./app/Model/user');
 
     const port = 3003;
-    const Routes = require('./routes');
 
     // set template engine 
     // app.set('view engine', 'hbs')
@@ -34,20 +33,6 @@ const serverStart= async () => {
 
     app.use(express.static('public'))
     // console.clear();
-    app.get('/', (req, res) => {
-        validator([
-            {
-                fieldName: "name",
-                fieldValue: 2,
-                validation: 'min:3|max:4',
-                errorMessage:"Invalid name"
-            }
-        ], (result) => {
-                res.send(result);
-                res.end();
-            });
-    });
-
 
 
     app.listen(port, () => {
