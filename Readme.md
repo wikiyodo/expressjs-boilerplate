@@ -23,53 +23,53 @@ A boilerplate application for building web apps using express, and mongoose.
 
 ```bash
 
-??? /.data/                    
-??? /app/                   
-?   ??? Http
-?   ?   ??? Controllers
-?   ?   ??? Middleware
-?   ??? Model
-??? /bootstrap/                
-?   ?   ??? boot-configuration.js
-?   ?   ??? boot-environment.js
-?   ?   ??? boot-helper-path.js
-?   ?   ??? boot-router.js
-?   ?   ??? index.js
-?   ?   ??? post-index.js
-??? /commands/                      
-?   ??? index.js
-?   ??? seed.js
-??? /database/
-?   ??? /schema/                   
-?   ?   ??? bank.js
-?   ?   ??? users.js
-?   ??? /seeds/                    
-?   ?    ??? bank.js
-?   ??? /connection.js
-?   ??? /all-seeds.js              
-??? /global/
-?   ??? constants.js
-?   ??? user-roles.js
-??? /helpers/*
-??? /resources/
-?   ??? /lang/
-?   ??? /view/
-??? /routes/
-?   ??? /api/
-?   ?   ??? index.js
-?   ?   ??? user.js
-?   ?   ??? guest.js
-?   ??? index.js
-?   ??? routes-string.js
-??? /tests/
-??? .env
-??? .env.example
-??? .gitignore
-??? app.js
-??? cmd.js
-??? package.json
-??? package-lock.json
-??? Readme.md
+├── /.data/                    
+├── /app/                   
+│   ├── Http
+│   │   ├── Controllers
+│   │   ├── Middleware
+│   ├── Model
+├── /bootstrap/                
+│   │   ├── boot-configuration.js
+│   │   ├── boot-environment.js
+│   │   ├── boot-helper-path.js
+│   │   ├── boot-router.js
+│   │   ├── index.js
+│   │   ├── post-index.js
+├── /commands/                      
+│   ├── index.js
+│   ├── seed.js
+├── /database/
+│   ├── /schema/                   
+│   │   ├── bank.js
+│   │   ├── users.js
+│   ├── /seeds/                    
+│   │    ├── bank.js
+│   ├── /connection.js
+│   └── /all-seeds.js              
+├── /global/
+│   ├── constants.js
+│   ├── user-roles.js
+├── /helpers/*
+├── /resources/
+│   ├── /lang/
+│   ├── /view/
+├── /routes/
+│   ├── /api/
+│   │   ├── index.js
+│   │   ├── user.js
+│   │   ├── guest.js
+│   ├── index.js
+│   ├── routes-string.js
+├── /tests/
+├── .env
+├── .env.example
+├── .gitignore
+├── app.js
+├── cmd.js
+├── package.json
+├── package-lock.json
+└── Readme.md
 
 ```
 ## Resolver
@@ -547,6 +547,10 @@ validator(rules, (result) => {
 ```
 ## Testing
 Unit testing has not been included in this boilerplate. However, you can choose to include it  on your own.
+
+## Contributing
+
+Anyone and everyone is welcome to  contribute.
 
 ## License
 
