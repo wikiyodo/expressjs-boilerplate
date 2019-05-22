@@ -1,7 +1,13 @@
 var validateMinString = (length, value, fieldName, customMessage) => {
-    length = parseFloat(length);
+    var valid = false;
 
-    var valid = value.length >= length;
+    if(value === undefined){
+        valid = false;
+    }else{
+        length = parseFloat(length);
+
+        valid = value.length >= length;
+    }
     if (!customMessage)
         customMessage = fieldName + ' should contain less than ' + length + ' chatacters';
 
@@ -59,7 +65,8 @@ var validateMin = (value, fieldName, customMessage, length) => {
         validation = validateMinNumber(length, value, fieldName, customMessage);
     // else if (value instanceof File)
     //    validation = validateMinFile(length, value, customMessage);
-    else return;
+    else 
+        validation = validateMinString(length, value, fieldName, customMessage);
 
     return validation;
 };

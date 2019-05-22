@@ -14,6 +14,7 @@ var validateNumber = require('./validateNumber'); // tested
 var validatePhone = require('./validatePhone'); // tested
 var validateRegex = require('./validateRegex'); // tested 
 var validateRequired = require('./validateRequired'); // tested
+var validateString = require('./validateString'); // tested
 
 var validateObject = (instruction) => {
     // instruction is expected to be an object
@@ -79,7 +80,7 @@ var validationResult = (callback, results) => {
 
     formatedResult.firstError = (fieldName) => {
         var errors = formatedResult.results[fieldName];
-        if (!errors || !errors.messages || !(errors instanceof Array)) return '';
+        if (!errors || !errors.messages || !(errors instanceof Object)) return '';
          
         return errors.messages[0] || '';
     };

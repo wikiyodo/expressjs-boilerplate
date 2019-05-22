@@ -5,6 +5,7 @@ const schemaPath = require('./path/schema');
 const env = require('./environment/index');
 const modelPath = require('./path/model');
 const routerPath = require('./path/routes');
+// const helpers = require('./aob');
 const parser = require('./router/parser');
 const connectionPath = require('./path/connection');
 
@@ -18,8 +19,9 @@ exports.model = modelPath;
 exports.connection = connectionPath;
 exports.router = routerPath;
 exports.parser = parser;
+// exports.helpers = helpers;
 exports.validator = () => {
-    return defaultPath('./validate/index');
+    return defaultPath('./helpers/validate/index');
 };
 exports.env = env;
 

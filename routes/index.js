@@ -6,5 +6,5 @@ var routeString = require('./routes-string');
 
 module.exports = (app) => {
     app.use('/api', apiRouter);
-    app.use('/web', apiRouter);
+    app.use('/', webRouter);
 };

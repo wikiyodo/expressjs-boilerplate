@@ -1,7 +1,12 @@
 var validateMaxString = (length, value, fieldName, customMessage) => {
-    length = parseFloat(length);
+    var valid = false;
+    if(value === undefined){
+        valid = false;
+    }else{
+        length = parseFloat(length);
 
-    var valid = value.length <= length;
+        valid = value.length <= length;
+    }
     if (!customMessage)
         customMessage = fieldName + ' should contain more than ' + length + ' chatacters';
 
@@ -58,7 +63,8 @@ var validateMax = (value, fieldName, customMessage, length) => {
         validation = validateMaxNumber(length, value, fieldName, customMessage);
     // else if (value instanceof File)
     //    validation = validateMaxFile(length, value, customMessage);
-    else return;
+    else 
+        validation = validateMaxString(length, value, fieldName, customMessage);
 
     return validation;
 };
