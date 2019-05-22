@@ -1,43 +1,108 @@
+// import helpers
 const pathResolver = require(process.env.resolver);
-const Roles = require(pathResolver.defaultPath('global/user-roles'));
+const UserModel = require(pathResolver.model('user'));
+const User = UserModel.User;
 const Controller = require('./controller');
-var UserController = {};
+let validator = require(pathResolver.validator());
+const helpers = require(pathResolver.defaultPath('helpers/aob'));
+
+let UserController = {};
 
 UserController.notFound = (req, res, next, message, extras) => {
     res.status = 404;
-    Controller.defaultResponse(res,null, message, false)
-};
-
-UserController.getUserRoles = (req, res, next) => {
-    var returnableRoles = [];
-    for (var role in Roles)
-        returnableRoles.push(Roles[role]);
-    Controller.defaultResponse(res, returnableRoles);
+    Controller.defaultResponse(res,null, message, false);
 };
 
 UserController.register = (req, res, next) => {
-    var userRole = req.params.role || '';
+    // validate the request
+    // required: firstname, lastname, email, password
+    let {firstName, lastName, email, password} = req.body;
+    validator([
+        {
+            fieldName: "first name",	// name of the field
+            fieldValue: firstName, 	// the value of the field
+            validation: 'required|alpha|min:3|max:15', // set of validation rules
+        },
+        {
+            fieldName: "last name",	// name of the field
+            fieldValue: lastName, 	// the value of the field
+            validation: 'required|alpha|min:3|max:15', // set of validation rules
+        },
+        {
+            fieldName: "email",	// name of the field
+            fieldValue: email, 	// the value of the field
+            validation: 'required|email', // set of validation rules
+        },
+        {
+            fieldName: "password",	// name of the field
+            fieldValue: password, 	// the value of the field
+            validation: 'required|string|min:3|max:15', // set of validation rules
+        },
+     ], (validation) => {
+            if(validation.failed()){
+                Controller.error(res,{
+                    firstName: validation.firstError('first name'),
+                    lastName: validation.firstError('last name'),
+                    email: validation.firstError('email'),
+                    password: validation.firstError('password'),
+                }, "Account could not be created. Check fields to fix error");
+                return;
+            }
 
-    switch (userRole.toLowerCase()) {
-        case Roles.SERVICE_PROVIDER.slug:
-            UserController.registerAsServiceProvider(req, res, next, () => { })
-            break;
-        case Roles.CUSTOMER.slug:
-            UserController.registerAsServiceProvider(req, res, next, () => { })
-            break;
-        default:
-            UserController.notFound(req, res, next, userRole + " user role not found for registration")
-                break;
-    }
+            // check if a similar user exists : email must be unique
+            UserModel.userExists({email}, (exists)=>{
+                console.log(exists);
+                if(exists){
+                    Controller.error(res,{
+                        email: "This account already exists",
+                    }, "Account could not be created. Check fields to fix error");
+                    return;
+                }else{
+                    // the validation was successful then create the user account
+                    UserModel.createUser(firstName, lastName, email, password);
+                    Controller.success(res, null, "Your account has been created!")
+                    return;
+                }
+            });
+        });
 };
 
-UserController.registerAsServiceProvider = (req, res, next, callback) => {
 
-};
+UserController.login = (req, res, next) => {
+    // validate the request
+    // required: firstname, lastname, email, password
+    let { email, password } = req.body;
+	console.log(password);
+    validator([
+        {
+            fieldName: "email",	// name of the field
+            fieldValue: email, 	// the value of the field
+            validation: 'required|email', // set of validation rules
+        },
+        {
+            fieldName: "password",	// name of the field
+            fieldValue: password, 	// the value of the field
+            validation: 'required|string', // set of validation rules
+        },
+     ], (validation) => {
+            if(validation.failed()){
+                Controller.error(res,null, "Invalid username/password");
+                return;
+            }
 
-
-UserController.registerAsCustomer = (req, res, next, callback) => {
-    
+            // get the account associated with 
+            UserModel.findUser({email}, async (err, user)=>{
+                if(user == null || user.password !== helpers.hash(password)){
+                    Controller.error(res,null, "Invalid username/password");
+                    return;
+                }
+                user.password = undefined;
+                user.apiKey  = undefined;    
+                let apiKey= await UserModel.setApiKey(user._id);
+                console.log(apiKey);
+                Controller.success(res,{apiKey,user}, "You have successfully logged in.");
+            });
+        });
 };
 
 

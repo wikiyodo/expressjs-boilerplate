@@ -1,7 +1,7 @@
-var SeedBanks= require('./seeds/banks');
+// var SeedBanks= require('./seeds/location');
 
 var exports = {
-    SeedBanks,
+    // SeedBanks,
 };
 
 module.exports = exports;

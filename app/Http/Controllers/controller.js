@@ -10,4 +10,13 @@ controller.defaultResponse = (res, content, message, status) => {
     res.end();
 };
 
+controller.success = (res, content, message) => {
+    return controller.defaultResponse(res, content, message, true);
+};
+
+
+controller.error = (res, content, message) => {
+    return controller.defaultResponse(res, content, message, false);
+};
+
 module.exports = controller;
